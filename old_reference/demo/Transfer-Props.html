@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transfer Props</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+	var extras = {test:'xyz'};
+	var properties = {foo:'default',bar:'default',...extras};
+	
+	var FooComponent = React.createClass({
+		render:function(){
+			return (<button>Button-{this.props.foo}</button>)
+		}
+	});	
+	var BarComponent = React.createClass({
+		render:function(){
+			return (<button>Button-{this.props.bar}</button>)
+		}
+	});
+	ReactDOM.render(
+		<div>
+			<FooComponent {...properties} foo="Foo" bar={undefined}/>
+			<BarComponent {...properties} bar="Bar" foo={undefined}/>
+		</div>,	document.getElementById('app')
+	);
+	
+	</script>
+</html>

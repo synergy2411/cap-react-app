@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mixin</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+	var ReactMixin = {
+		getDefaultProps:function(){
+			return{
+				val:'Input Component'
+			}
+		},
+		getInitialState:function(){
+			return {
+				counter:0
+			}
+		},
+		componentWillMount:function(){
+			console.log('Component about to get mounted');
+		},
+		componentDidMount :function(){
+			console.log('Component Mounted');
+			console.log(ReactDOM.findDOMNode(this));
+		},
+		updateCounter:function(){
+			this.setState({counter:this.state.counter+1});
+		}
+	}
+	
+	var ButtonComponent = React.createClass({
+		mixins:[ReactMixin],
+		render:function(){
+			return (<button onClick={this.updateCounter}>{this.props.val+':'+this.state.counter}</button>)
+		}
+	});
+	
+	var TextComponent = React.createClass({
+		mixins:[ReactMixin],
+		componentWillMount:function(){
+			setInterval(this.updateCounter,1000);
+		},
+		render:function(){
+			return (<input type="text" readOnly value={this.props.val+':'+this.state.counter}/>)
+		}
+	});
+	
+	ReactDOM.render(
+		<div>
+				<ButtonComponent/>&nbsp;
+				<TextComponent/>
+		</div>,	document.getElementById('app')
+	);
+	
+	</script>
+</html>

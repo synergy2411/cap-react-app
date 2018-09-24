@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Unidirectional Flow</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+		var Child = React.createClass({
+			render:function(){
+				return(<span>{this.props.data}</span>);
+			}
+		});
+		
+		var Parent= React.createClass({
+			getInitialState:function(){
+				return {val:''}
+			},
+			updateText:function(event){
+				this.setState({val:event.target.value});
+			},
+			render:function(){
+				return(
+					<div>
+						<h1>React Unidirectional data flow</h1>
+						<input type="text" onChange={this.updateText}/>&nbsp;
+						<Child data={this.state.val}/>
+					</div>
+				);
+			}
+		});
+		
+		ReactDOM.render(<Parent/>,document.getElementById('app'));
+		
+	</script>
+</html>

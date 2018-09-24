@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React-Component-Static-Methods</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+	var SampleComponent = React.createClass({
+		statics:{
+			title:'Static Method Demo',
+			getYear:function(yr){
+				alert(yr);
+			}
+		}, 
+		render:function(){
+			SampleComponent.getYear(this.props.year);
+			return (<div>{this.constructor.title+'-'+this.props.year}</div>);
+		}
+	});
+	
+	ReactDOM.render(<SampleComponent year={2016}/>,document.getElementById('app'));
+	
+	</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Using Refs</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+	var TextGroupComponent = React.createClass({
+		getValue:function(){
+			var txtFirstNode = this.refs.first;
+			var txtSecondNode = this.refs.second;
+			alert('First TextBox Vaule : '+txtFirstNode.value);
+			alert('Second TextBox Vaule : '+txtSecondNode.value);
+		},
+		render:function(){
+			return (
+			<div>
+				<input ref="first" defaultValue="0" type="text"/>
+				<input ref="second" defaultValue="0" type="text"/>
+				<button onClick={this.getValue}>Get Value</button>
+			</div>
+			)
+		}
+	});
+	
+	ReactDOM.render(
+		<div>
+			<TextGroupComponent/>
+		</div>,	document.getElementById('app')
+	);
+	</script>
+</html>

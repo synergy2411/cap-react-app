@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Using Props</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+		var SampleComponent = React.createClass({
+			render:function() {
+				return (
+					<div>
+						<span>{"Name : "+this.props.children.props.children}</span>
+					</div>
+				)
+			}
+		});
+	
+		var Greet = React.createClass({
+			getDefaultProps:function(){
+				return {
+					name:'Karthik',
+					now:new Date('2016-12-30'),
+					details:{location:'Bangalore'}
+				}
+			},
+			render:function(){
+				return (
+					<div>
+						{"Hi "+this.props.name +" from "+this.props.details.location+" - " +this.props.now}
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<div>
+				<Greet name="Anil Patil" now={new Date()} details={{location:'Mumbai'}}/>
+				<hr/>
+				<Greet/>
+				<hr/>
+				<SampleComponent><div>Karthik</div></SampleComponent>
+			</div>,document.getElementById('app')
+		);
+	</script>
+</html>

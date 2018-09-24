@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inline Styles</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+
+	var Component = React.createClass({
+		render:function(){
+			var customStyle = {color:'brown',backgroundColor:'yellow'};
+			return (
+				<div>
+					<ButtonComponent customStyle={customStyle}/>
+					<InputComponent customStyle={customStyle}/>
+				</div>
+			);
+		}
+	});
+	
+	var ButtonComponent = React.createClass({
+		render:function(){
+			return(
+				<button style={this.props.customStyle}>Button</button>
+			);
+		}
+	});
+	
+	var InputComponent = React.createClass({
+		render:function(){
+			return(
+				<input style={this.props.customStyle} type="text" defaultValue="Textbox"/>
+			);
+		}
+	});
+	
+	
+	ReactDOM.render(
+		<Component/>,document.getElementById('app')
+	);
+	
+	</script>
+</html>

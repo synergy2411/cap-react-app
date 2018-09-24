@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React Component Life Cycle Methods Execution</title>
+	</head>
+	<body>
+		<div>
+			<button id="create">Create Component</button>
+			<button id="remove">Remove Component</button>
+		</div>
+		<hr/>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+		var ButtonComponent = React.createClass({
+			getDefaultProps:function(){
+				console.log('getDefaultProps...');
+				return {
+					val:0
+				}
+			},
+			getInitialState:function(){
+				console.log('getInitialState...');
+				return {
+					data:0
+				}
+			},
+			updateVal:function(){
+				var newVal = this.props.val + 1;
+				this.setState({data:this.state.data+1});
+				ReactDOM.render(<ButtonComponent val={newVal}/>,document.getElementById('app'));
+			},
+			componentWillMount:function(){
+				console.log("componentWillMount...");
+			},
+			componentWillReceiveProps:function(nextProps){
+				console.log("componentWillReceiveProps : ",nextProps);
+			},
+			shouldComponentUpdate:function(nextProps,nextState){
+				console.log("shouldComponentUpdate : ",nextProps);
+				return true;
+			},
+			componentWillUpdate:function(nextProps,nextState){
+				console.log("componentWillUpdate : ",nextProps);
+			},
+			render:function(){
+				console.log('rendering...');
+				return (<button onClick={this.updateVal}>{"React Button : "+this.props.val}</button>)
+			},
+			componentDidMount:function(){
+				console.log("componentDidMount...");
+				console.log(ReactDOM.findDOMNode(this));
+			},
+			componentDidUpdate:function(prevProps,prevState){
+				console.log("componentDidUpdate : ",prevProps,prevState);
+			},
+			componentWillUnmount:function(){
+				console.log("componentWillUnmount...");
+			}
+		});
+	
+		var buttonCreateComponent = document.getElementById('create');
+		var buttonRemoveComponent = document.getElementById('remove');
+		
+		buttonCreateComponent.onclick = function(){
+			ReactDOM.render(<ButtonComponent/>,document.getElementById('app'));
+		}
+		
+		buttonRemoveComponent.onclick = function(){
+			ReactDOM.unmountComponentAtNode(document.getElementById('app'));
+		}
+	</script>
+</html>

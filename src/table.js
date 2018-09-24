@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
 class Table extends Component {
-
-
     render() {
-        const { users } = this.props;
-
+        const { users, removeUser } = this.props;
         const handleClick = (index) => {
-            // alert("Clicked");
-            this.props.removeUser(index);
+            // this.props.removeUser(index);
+            removeUser(index);
         }
 
         const TableHead = () => {
@@ -37,7 +34,7 @@ class Table extends Component {
                                 Delete
                             </button> */}
                             <button className="btn btn-default"
-                                onClick={()=>handleClick(index) }>
+                                onClick={() => handleClick(index)}>
                                 Delete
                             </button>
                         </td>

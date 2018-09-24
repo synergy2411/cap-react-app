@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Prop Validation</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+		var DepartmentComponent = React.createClass({
+			render:function(){
+				return (<div>Test</div>)
+			}
+		});
+		
+		var EmployeeComponent = React.createClass({
+			propTypes:{
+				employee: React.PropTypes.shape({
+					employeeId: React.PropTypes.number.isRequired,
+					name : React.PropTypes.string.isRequired,
+					email: React.PropTypes.string.isRequired,
+					roles: React.PropTypes.arrayOf(React.PropTypes.string),
+					gender: React.PropTypes.oneOf(['M','F'])
+				}).isRequired,
+				
+				postalCode:function(props, propName, componentName){
+					if (!/^\d{6}$/.test(props[propName])) {
+						return new Error('Invalid Postal Code');
+					}
+				},
+				children:function(props, propName, componentName){
+					if (React.Children.count(props[propName]) < 1){
+						return new Error('Minimum 1 child required');
+					}
+				}
+			},
+			render:function(){
+				return (<div>Validated!!!</div>)
+			}
+		});
+		ReactDOM.render(
+			<EmployeeComponent 	
+				employee={{employeeId:1,name:'Karthik',email:'karthik@capgemini.com',roles:['Trainer','Consultant'],gender:'M'}}
+				postalCode = {560066}
+			><div>1</div></EmployeeComponent>,
+		document.getElementById('app'));
+	</script>
+</html>

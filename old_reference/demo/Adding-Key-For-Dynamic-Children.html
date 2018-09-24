@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Adding Key for Dynamic Children</title>
+		<style>
+			 table { border-spacing: 0; border-collapse: collapse; }
+			td, th { border: 1px solid black; padding: 4px 8px; }
+		</style>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+	var Employees = React.createClass({
+		getDefaultProps:function(){
+			return{
+				border:1
+			}
+		},
+		getInitialState:function(){
+			return {
+				employees:[{id:1,name:"Karthik"},{id:2,name:"Ganesh"},{id:3,name:"Abishek"}]
+			}
+		},
+		render:function(){
+			return (
+				<div>
+					<h1>EmployeeList</h1>
+					<EmployeeList employees={this.state.employees}/>
+				</div>
+			);
+		}
+	}); 
+	
+	var EmployeeList = React.createClass({
+		render:function(){
+			
+			var createEmployeeRow = function(employee){
+				return(
+					<tr key={employee.id}>
+						<td>{employee.id}</td>
+						<td>{employee.name}</td>
+					</tr>
+				);
+			}
+		
+			return (
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.props.employees.map(createEmployeeRow,this)}
+						</tbody>
+					</table>
+				</div>
+			);
+		}
+	}); 
+	
+	ReactDOM.render(<Employees/>,document.getElementById('app'));
+	</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Event Handling</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="./scripts/react.js"></script>
+	<script src="./scripts/react-dom.js"></script>
+	<script src="./scripts/browser.js"></script>
+	<script type="text/babel">
+	
+		var ButtonComponent = React.createClass({
+			render:function(){
+				return (
+					<button onClick={this.props.handler}>{this.props.title}</button>
+				)
+			}
+		});
+		
+		var Component = React.createClass({
+			clickHandler:function(){
+				alert('Clicked');
+			},
+			render:function(){
+				return <ButtonComponent title="Go" handler={this.clickHandler} />
+			}
+		});
+		
+		
+		ReactDOM.render(<Component/>,document.getElementById('app'));
+	</script>
+</html>
