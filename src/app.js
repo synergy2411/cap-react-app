@@ -18,6 +18,12 @@ class App extends Component {
     // console.log(this.state.users);
     }
 
+    addNewUser = (user)=>{
+        this.setState({
+            users : [...this.state.users, user]
+        })
+    }
+
     render() {
 
         const removeUser = (index)=> {
@@ -42,7 +48,9 @@ class App extends Component {
             <div>
                 <h2>Welcome to React!!</h2>
                 <Table users={users} removeUser={removeUser} />
-                <Form />
+                <div className="container">
+                    <Form addingUser = { this.addNewUser }/>
+                </div>
             </div>
         )
     }
