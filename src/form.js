@@ -16,6 +16,8 @@ class Form extends Component{
         })
     }
     handleSubmit = () =>{
+        console.log("Name : " + this.refs.name.value);
+        console.log("Role : " + this.refs.role.value);
         console.log(this.props);
         this.props.addingUser(this.state);
         // this.setState(this.initalState);
@@ -28,6 +30,7 @@ class Form extends Component{
                     className="form-control" 
                     placeholder="Enter name"
                     name = "name"
+                    ref = "name"
                     value = {this.state.name}
                     onChange={this.changerHandler}/>
                 Role :
@@ -35,6 +38,7 @@ class Form extends Component{
                     className="form-control" 
                     placeholder="Role"
                     name = "role"
+                    ref = "role"
                     value={this.state.role}
                     onChange={this.changerHandler}/>
                 <button type="button" 

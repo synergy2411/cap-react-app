@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Table from './table';
 import Form from './form';
+import Product from './product';
+import ProductList from './product-list';
 
 class App extends Component {
     state = {};
@@ -13,11 +15,17 @@ class App extends Component {
             }, {
                 name: "Preeta",
                 role: "User"
-            }]
+            }],
+            products : []           
         }
     // console.log(this.state.users);
     }
 
+    addProduct = (product) =>{
+        this.setState({
+            products : [...this.state.products, product]
+        });
+    }
     addNewUser = (user)=>{
         this.setState({
             users : [...this.state.users, user]
@@ -51,6 +59,13 @@ class App extends Component {
                 <div className="container">
                     <Form addingUser = { this.addNewUser }/>
                 </div>
+                <div className="container">
+                    <Product addProduct = { this.addProduct } />
+                </div>
+                <div>
+                    <ProductList products = {this.state.products} />
+                </div>
+                
             </div>
         )
     }
