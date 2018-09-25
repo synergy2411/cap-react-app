@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 
 class Product extends Component {
 
+    componentDidMount(){
+        console.log("componentDidMount");
+    }
+    componentDidUpdate(){
+        console.log("componentDidUpdate");
+    }
+    componentWillUnmount(){
+        console.log("componentWillUnmount");
+    }
+
     constructor() {
+        console.log("constructor");
         super();
         this.initialState = {
             name: "",
@@ -18,11 +29,12 @@ class Product extends Component {
     }
     addNewProduct = () => {
         // console.log(this.props);
-        // console.log(this.state);
+        alert(this.refs.pname);
         this.props.addProduct(this.state);
         this.setState(this.initialState);
     }
     render() {
+        console.log("render");
         const ProductList = ()=>{
             return (
                 <div>
@@ -35,10 +47,12 @@ class Product extends Component {
                 <h2>Product Loaded!</h2>
                 <ProductList />
                 <form>
+                    {/* <date ref= "/"></date> */}
                     Product Name :
                     <input type="text"
                         className="form-control"
                         name="name"
+                        ref="pname"
                         value={this.state.name}
                         onChange={this.handleChange} />
                     Product Quantity :
